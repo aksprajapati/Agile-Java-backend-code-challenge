@@ -1,56 +1,71 @@
-# Agile Contents Java backend code challenge README
+# Project Setup Instructions
 
-## Code challenge
+This document provides the required steps to build, run, and test the project. Follow these instructions carefully to ensure the application works as expected.
 
-The purpose of the test is to validate your technical and organizational skills. It’s not a big
-deal if you can’t finish it, we prefer to have an incomplete clean and functional code than a 
-badly organized and “ugly” code. It's OK if you set a maximum duration to the challenge.
+---
 
-You have to use the Java programming language and Spring Boot. Apart from that, it's up to you
-how you structure the code and what libraries you use. You may also use any code generation tool
-like https://start.spring.io[Spring Initializr] or https://www.jhipster.tech[JHypster].
+## Prerequisites
 
-Please create a fork of this repository, so you can use it as it suits you. The
-only requirement is that all the code must be available in the master branch once you have
-finished. You can also edit this document if you want to include any information, like build and
-running instructions, that would be useful to us.
+### Tools and Environment
+- **Java 11** (Ensure it is installed and added to your PATH.)
+- **Maven 3.6+** (For dependency management and build process.)
 
-Take into account that, after you finish the code challenge, we will review it and then maybe we will ask
-you to perform a code review together, just to learn a bit about the project and code structure.
+### External Dependencies
+The project is configured to use the H2 in-memory database by default for simplicity. No additional setup is required for the database unless you want to use an external one.
 
-IMPORTANT: We would be glad to answer any questions or hear any suggestions about the code
-challenge, so don't hesitate to ask. 
+---
 
-### Features
+## Steps to Build the Project
 
-The application to develop has to manage a collection of users with the following information:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/agilecontent/Agile-Java-backend-code-challenge.git
+   cd Agile-Java-backend-code-challenge
+   ```
 
-* Username (unique)
-* Name
-* Email
-* Gender
-* Picture (only URL value)
+2. Build the project using Maven:
+   ```bash
+   mvn clean install
+   ```
 
-Users will be persisted to a database. You can use any database of your preference, relational or
-not. Usage of a memory database or one integrated in the app itself is advised for simplicity.
+This command will compile the source code, run unit tests, and package the application.
 
-The application will provide the following JSON web services:
+---
 
-* */api/users/ (GET)*: return the list of all users.
-* */api/users/{username}/ (GET)*: return a single user.
-* */api/users/ (POST)*: create a user.
-* */api/users/{username}/ (PUT)*: update the information of a single user.
-* */api/users/{username}/ (DELETE)*: delete a single user.
-* */api/users/generate/{number}/ (GET)*: generate a number, provided as a parameter, of random users.
-To create the users you have to use the https://randomuser.me[Random User Generator] service. Users
-will be added to the collection of existing users.
-* */api/users/tree/ (GET)*: return a tree with the users grouped by country, state and city (It can’t be done in database).
+## Running the Application
 
-Extra optional features (only if you are done with the previous features):
+1. Run the Spring Boot application:
+   ```bash
+   mvn spring-boot:run
+   ```
+2. Access the application at:
+   ```
+    http://localhost:8080/api/users
+   ```
+---
 
-* Unit tests (at least one class).
-* Pagination of the users list.
-* API documentation using Swagger, Spring REST docs or any other tool.
+## Testing the Application
 
-Please, as an integral part of the challenge, update this document or add another one with the instructions required to build, run or test the project. As an example, if any external database is required, provide the required steps to prepare it beforehand, using docker or any other solution if possible, although using an integrated in memory database is preferred for simplicity.
+### Unit Tests
+Run the unit tests with the following command:
+```bash
+mvn test
+```
 
+### API Testing
+
+Once the application is running, you can use tools like Postman or `curl` to test the API endpoints.
+
+#### Some Endpoints:
+
+1. **Fetch paginated users**:
+   ```
+   GET /api/users?page=0&size=10
+   ```
+
+2. **Fetch user tree**:
+   ```
+   GET /api/users/tree
+   ```
+
+---
